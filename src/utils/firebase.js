@@ -1,6 +1,5 @@
 const { initializeApp } = require("firebase/app");
 const { getStorage, ref, getDownloadURL, listAll } = require("firebase/storage");
-const { getFirestore, collection, getDocs } = require("firebase/firestore");
 
 const firebaseConfig = {
 	apiKey: "AIzaSyCobMHcAZWNHnE7YMlnWehc5vFtfZfM7fc",
@@ -14,32 +13,32 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-const db = getFirestore(app);
+// const db = getFirestore(app);
 
 // returns docObj {index: 4, caption: 'Soytiet Portrait Art'}
-// if no caption, returns {index: 4, caption: undefined}
-const getImgCaptions = async (folderFileName) => {
-	const collectionRef = collection(db, folderFileName);
-	try {
-		const docs = await getDocs(collectionRef);
-		let docObjList = [];
+// // if no caption, returns {index: 4, caption: undefined}
+// const getImgCaptions = async (folderFileName) => {
+// 	const collectionRef = collection(db, folderFileName);
+// 	try {
+// 		const docs = await getDocs(collectionRef);
+// 		let docObjList = [];
 
-		docs.forEach((doc) => {
-			const docObj = {};
-			docObj.index = parseInt(doc.id.split(folderFileName)[1]);
-			docObj.caption = doc.data().caption;
-			docObjList.push(docObj);
-		});
-		console.log(docs[0]?.data());
-		const sortedDocList = docObjList.sort((a, b) => a.index - b.index);
-		const sortedCaptions = sortedDocList.map((arr) => arr.caption);
+// 		docs.forEach((doc) => {
+// 			const docObj = {};
+// 			docObj.index = parseInt(doc.id.split(folderFileName)[1]);
+// 			docObj.caption = doc.data().caption;
+// 			docObjList.push(docObj);
+// 		});
+// 		console.log(docs[0]?.data());
+// 		const sortedDocList = docObjList.sort((a, b) => a.index - b.index);
+// 		const sortedCaptions = sortedDocList.map((arr) => arr.caption);
 
-		return sortedCaptions;
-	} catch (e) {
-		console.error("Error fetching captions from database: ", e);
-	}
-	console.log("Done fetching captions");
-};
+// 		return sortedCaptions;
+// 	} catch (e) {
+// 		console.error("Error fetching captions from database: ", e);
+// 	}
+// 	console.log("Done fetching captions");
+// };
 // ----------------------------------------------------------------
 
 //filenameIndex => returns [index,url]
@@ -52,7 +51,22 @@ const getIndexURL = (url, folderFileName) => {
 	}
 };
 
-const getSortedUrls = async (folderFileName) => {
+export const getDataJson = async () => {
+	// get data.json from firebase
+	const dataJsonRef = ref(storage, "data.json");
+	try {
+		const url = await getDownloadURL(dataJsonRef);
+		const response = await fetch(url);
+		const dataJson = await response.json();
+		console.log(dataJson);
+		return dataJson;
+	} catch (e) {
+		console.error("Error fetching data.json from cloud: ", e);
+	}
+	console.log("Done fetching data.json");
+};
+
+export const getSortedUrls = async (folderFileName) => {
 	const folderRef = ref(storage, folderFileName);
 	try {
 		const files = await listAll(folderRef);
@@ -73,5 +87,3 @@ const getSortedUrls = async (folderFileName) => {
 };
 
 // ----------------------------------------------------------------
-
-export { getSortedUrls, getImgCaptions };
