@@ -58,12 +58,11 @@ export const getDataJson = async () => {
 		const url = await getDownloadURL(dataJsonRef);
 		const response = await fetch(url);
 		const dataJson = await response.json();
-		console.log(dataJson);
+		console.log("Done fetching data.json");
 		return dataJson;
 	} catch (e) {
 		console.error("Error fetching data.json from cloud: ", e);
 	}
-	console.log("Done fetching data.json");
 };
 
 export const getSortedUrls = async (folderFileName) => {
@@ -77,7 +76,9 @@ export const getSortedUrls = async (folderFileName) => {
 		const urlList = await Promise.allSettled(urlPromises);
 		const indexedList = urlList.map((url) => getIndexURL(url, folderFileName));
 		const sortedList = indexedList.sort((a, b) => a[0] - b[0]);
-		const sortedURLs = sortedList.map((arr) => arr[1]);
+		const sortedURLs = sortedList.map((arr) => {
+			return { image: arr[0], src: arr[1] };
+		});
 		console.log(`Fetched ${sortedURLs.length} images out of ${urlList.length} images in ${folderFileName} folder`);
 		return sortedURLs;
 	} catch (e) {

@@ -20,8 +20,8 @@ export const Navigation = (props) => {
 
 				<div className='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 					<ul className='nav navbar-nav navbar-right'>
-						<li>
-							<a href='#portfolio' className='page-scroll'>
+						<li className='active'>
+							<a href='#portfolio' className='page-scroll '>
 								1 / 1 Arts
 							</a>
 						</li>
@@ -41,7 +41,12 @@ export const Navigation = (props) => {
 							</a>
 						</li>
 						<li>
-							<a href='https://kspaze1.art/' target='_blank' rel='noreferrer' className='page-scroll'>
+							<a
+								href='https://kspaze1-gc.web.app/'
+								target='_blank'
+								rel='noreferrer'
+								className='page-scroll'
+							>
 								Past Projects
 							</a>
 						</li>

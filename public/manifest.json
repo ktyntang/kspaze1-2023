@@ -1,0 +1,14 @@
+{
+	"short_name": "Kspaze1",
+	"name": "Kspaze1 Portfolio by K-Tyn Tang",
+	"icons": [
+		{
+			"src": "LOGO.svg",
+			"type": "image/svg"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
+}

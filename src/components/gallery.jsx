@@ -1,7 +1,7 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import "./gallery.css";
 
-export default function Gallery({ images, data }) {
+export default function Gallery({ images }) {
 	//images is an array of image urls
 	//captions is an array of objects with caption and link properties
 	return (
@@ -13,15 +13,15 @@ export default function Gallery({ images, data }) {
 						return (
 							<div
 								className='image-container'
-								key={`${image.split("token=")[1]}`}
-								onClick={() => (data[i]?.link ? window.open(data[i].link, "_blank") : null)}
+								key={`${image.src.split("token=")[1]}`}
+								onClick={() => (image?.link ? window.open(image.link, "_blank") : null)}
 							>
 								<div className='hover-bg'>
 									<div className='hover-text'>
-										<h4>{data[i]?.caption ?? "Artwork by Kspaze1"}</h4>
+										<h4>{image?.caption ?? "Artwork by Kspaze1"}</h4>
 									</div>
 								</div>
-								<img src={image} alt={`${image}`} />
+								<img src={image.src} alt={`${image?.caption}`} />
 							</div>
 						);
 					})}
