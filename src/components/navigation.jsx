@@ -8,10 +8,13 @@ export const Navigation = (props) => {
 						className='navbar-toggle collapsed'
 						data-toggle='collapse'
 						data-target='#bs-example-navbar-collapse-1'
+						onClick={() => {
+							document.querySelector(".navbar-collapse").classList.toggle("in");
+							//because the bootstrap is not working properly
+						}}
 					>
-						{" "}
-						<span className='sr-only'>Toggle navigation</span> <span className='icon-bar'></span>{" "}
-						<span className='icon-bar'></span> <span className='icon-bar'></span>{" "}
+						<span className='sr-only'>Toggle navigation</span> <span className='icon-bar'></span>
+						<span className='icon-bar'></span> <span className='icon-bar'></span>
 					</button>
 					<a className='navbar-brand page-scroll' href='#page-top'>
 						Kspaze1
