@@ -17,14 +17,19 @@ const App = () => {
 	const [portfolioImages, setPortfolioImages] = useState([]); // [{image: 0, url: ""}}]
 	const [portfolioImgData, setPortfolioImgData] = useState([]); // [{image: 0, caption: "", link: ""}]
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [isError, setIsError] = useState(false);
 
 	useEffect(() => {
 		async function getDataAndImgs() {
-			let data = await getDataJson();
-			let urls = await getSortedUrls("portfolio");
-			setPortfolioImgData(data.portfolio);
-			setPortfolioImages(urls);
-			setIsLoaded(true);
+			try {
+				let data = await getDataJson();
+				let urls = await getSortedUrls("portfolio");
+				setPortfolioImgData(data.portfolio);
+				setPortfolioImages(urls);
+				setIsLoaded(true);
+			} catch (err) {
+				setIsError(true);
+			}
 		}
 		getDataAndImgs();
 	}, []);
@@ -32,7 +37,25 @@ const App = () => {
 	return (
 		<div>
 			<Navigation />
-			{isLoaded ? <Portfolio srcList={portfolioImages} dataList={portfolioImgData} /> : <Loader />}
+			{isError ? (
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "center",
+						alignItems: "center",
+						margin: "25vh 0",
+						paddingTop: "100px",
+					}}
+				>
+					<h1>Error loading images</h1>
+					<p>Please check your connection or try again later.</p>
+				</div>
+			) : isLoaded ? (
+				<Portfolio srcList={portfolioImages} dataList={portfolioImgData} />
+			) : (
+				<Loader />
+			)}
 			<Socials />
 			<footer id='footer'>©2023 Kspaze1. All rights reserved.</footer>
 		</div>
