@@ -1,4 +1,5 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { Image, Shimmer } from "react-shimmer";
 import "./gallery.css";
 
 export default function Gallery({ images }) {
@@ -21,7 +22,11 @@ export default function Gallery({ images }) {
 										<h4>{image?.caption ?? "Artwork by Kspaze1"}</h4>
 									</div>
 								</div>
-								<img src={image.src} alt={`${image?.caption}`} />
+								<Image
+									src={image.src}
+									alt={`${image?.caption}`}
+									fallback={<Shimmer width={350} height={400} />}
+								/>
 							</div>
 						);
 					})}
