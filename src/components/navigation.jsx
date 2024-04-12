@@ -17,7 +17,7 @@ export const Navigation = (props) => {
 						<span className='icon-bar'></span> <span className='icon-bar'></span>
 					</button>
 					<a className='navbar-brand page-scroll' href='#page-top'>
-						Kspaze1
+						Kspaze<span style={{padding:'0.05em',fontSize:'105%'}}>1</span>
 					</a>
 				</div>
 

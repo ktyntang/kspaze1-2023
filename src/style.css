@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+
 body,
 html {
-	font-family: "Open Sans", sans-serif;
+	/* font-family: "Open Sans", sans-serif; */
+	font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+  font-style: normal;
 	text-rendering: optimizeLegibility !important;
 	-webkit-font-smoothing: antialiased !important;
 	color: #777;
@@ -12,7 +18,7 @@ h2,
 h3,
 h4 {
 	/* font-family: "Raleway", sans-serif; */
-	font-family: "Open Sans", sans-serif;
+	/* font-family: "Open Sans", sans-serif; */
 }
 h2 {
 	text-transform: uppercase;
@@ -84,14 +90,14 @@ hr {
 }
 
 #menu a.navbar-brand {
-	font-family: "Raleway", sans-serif;
+	/* font-family: "Raleway", sans-serif; */
 	font-size: 24px;
 	font-weight: 700;
 	color: #333;
 	text-transform: uppercase;
 }
 #menu.navbar-default .navbar-nav > li > a {
-	font-family: "Lato", sans-serif;
+	/* font-family: "Lato", sans-serif; */
 	text-transform: uppercase;
 	color: #555;
 	font-size: 15px;
